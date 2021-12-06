@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Tmdb from './Tmdb';
 import FeaturedMovie from './components/FeaturedMovie';
+import Header from './components/Header';
 
 import MovieRow from './components/MovieRow';
 
@@ -10,6 +11,7 @@ const App = () =>  {
 
   const [movieList, setMovieList] = useState([]);
   const [featuredData, setFeaturedData] = useState(null);
+  const [blackHeader, setBlackHeader] = useState(false);
 
   useEffect(() =>{
     const loadAll = async () => {
@@ -30,6 +32,8 @@ const App = () =>  {
 
   return (
     <div className="page">
+
+      <Header black={blackHeader} />
 
       {featuredData &&
         <FeaturedMovie item={featuredData} />
