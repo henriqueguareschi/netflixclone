@@ -30,6 +30,22 @@ const App = () =>  {
     loadAll();
   }, []);
 
+  useEffect(() =>{
+    const scrollListener = () => {
+      if(window.scrollY > 10) {
+        setBlackHeader(true);
+      } else {
+        setBlackHeader(false);
+      }
+    }
+
+    window.addEventListener('scroll', scrollListener);
+
+    return () => {
+      window.removeEventListener('scroll', scrollListener);
+    }
+  }, []);
+
   return (
     <div className="page">
 
@@ -44,6 +60,18 @@ const App = () =>  {
             <MovieRow key={key} title={item.title} items={item.items}/>
           ))}
         </section>
+
+        <footer>
+          Feito por Henrique Guareschi <br/>
+          Direitos reservados a Netflix <br/>
+          Dados de Themoviedb.org <br/>
+        </footer>
+
+        {movieList.length <= 0 &&
+          <div className="loading">
+            <img src="https://media.filmelier.com/noticias/br/2020/03/Netflix_LoadTime.gif" alt="carregando" />
+          </div>
+        }
     </div>
   );
 }
